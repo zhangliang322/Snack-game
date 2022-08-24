@@ -13,15 +13,17 @@ int food = 1;
 int dirs[5][2] = { {0,0},{0,-1},{0,1} ,{-1,0},{1,0} };//direction
 //对应键盘1234上下左右
 int map_lenth = 20, map_width = 12;//len and width of map
-int direction = 2;//current direction
+int direction = 2;//current direction 生成蛇的时候初始方向向右
 COORD head;
 int room[32][32]; //record map
 
 void go(int x, int y)
 {
 	COORD coord; //自带的坐标结构
-	coord.X = x * 2;   //这里将int类型值传给short,不过程序中涉及的坐标值均不会超过short范围//
-	//为什么这里要乘2？
+	//coord.X = x ; //为什么这里要乘2？ win自带的长宽比不一样，更新的时候x*2横向才是正常的，*1会挤在一起
+    coord.X = x * 2;
+    //这里将int类型值传给short,不过程序中涉及的坐标值均不会超过short范围//
+	
 	coord.Y = y;
 	HANDLE a = GetStdHandle(STD_OUTPUT_HANDLE);//获得std output 的handle
 	SetConsoleCursorPosition(a, coord);//设置控制台光标坐标，在win窗内生成鼠标光标
